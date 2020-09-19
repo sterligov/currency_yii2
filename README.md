@@ -11,3 +11,7 @@
 Но также есть команда позволяющая запустить миграции отдельно make migrations.
 
 Основная логика лежит в папке components.
+
+Примеры запросов:
+localhost:8080/currency/1
+localhost:8080/currencies?page=2
