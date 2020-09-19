@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  php:
+    image: yiisoftware/yii2-php:7.4-apache
+    container_name: immo-php
+    volumes:
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      - ./:/app:delegated
+    ports:
+      - '8080:80'
+
+  immo-db:
+    image: mysql:5.7
+    container_name: immo-db
+    volumes:
+      - .docker/mysql/init:/docker-entrypoint-initdb.d
+      - .docker/mysql/data:/var/lib/mysql
+      - .docker/mysql/custom.cnf:/etc/mysql/conf.d/custom.cnf
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'immo'
+      MYSQL_USER: 'db_user'
+      MYSQL_PASSWORD: 'db_user'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '3311:3306'
+
